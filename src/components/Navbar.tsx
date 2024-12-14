@@ -8,7 +8,7 @@ interface LinksProps {
   path: string;
 }
 
-const links: LinksProps[] = [
+export const links: LinksProps[] = [
   {
     name: "home",
     path: "/",

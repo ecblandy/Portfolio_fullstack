@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 // Components
 import Navbar from "./Navbar";
-
+import MobileNavbar from "./MobileNavbar";
 export default function Header() {
   return (
     <>
@@ -23,7 +23,9 @@ export default function Header() {
             </Link>
           </div>
           {/* mobile nav */}
-          <div className="xl:hidden">Mobile nav</div>
+          <div className="xl:hidden">
+            <MobileNavbar />
+          </div>
         </div>
       </header>
     </>
