@@ -19,7 +19,7 @@ export default function Header() {
           <div className="hidden xl:flex items-center gap-8">
             <Navbar />
             <Link href="/contact">
-              <Button>Contato</Button>
+              <Button>Login</Button>
             </Link>
           </div>
           {/* mobile nav */}
