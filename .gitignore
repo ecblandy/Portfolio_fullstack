@@ -17,7 +17,7 @@ tailwind.md
 # next.js
 /.next/
 /out/
-
+/src/services
 # production
 /build
 
