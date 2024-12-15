@@ -40,25 +40,24 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 // About data
 const about = {
-  title: "About me",
-  description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, optio.",
+  title: "Sobre mim",
+  description: "Aqui você encontrará algumas informações pessoais sobre mim.",
   info: [
     {
-      fieldName: "Name",
+      fieldName: "Nome",
       fieldValue: "Vinícius Blandy",
     },
     {
-      fieldName: "Phone",
+      fieldName: "Telefone",
       fieldValue: "(71) 99402-7893",
     },
     {
-      fieldName: "Experience",
-      fieldValue: "2 years",
+      fieldName: "Experiência",
+      fieldValue: "2 anos",
     },
     {
-      fieldName: "Nationality",
-      fieldValue: "Brazil",
+      fieldName: "Nacionalidade",
+      fieldValue: "Brasil",
     },
     {
       fieldName: "Email",
@@ -66,75 +65,25 @@ const about = {
     },
     {
       fieldName: "Freelance",
-      fieldValue: "Available",
+      fieldValue: "Disponível",
     },
     {
-      fieldName: "Languages",
-      fieldValue: "Portuguese, english, spanish.",
+      fieldName: "Línguas",
+      fieldValue: "Português, Inglês, Espanhol",
     },
   ],
 };
 // Experience data
 const experience = {
   icon: "/assets/resume/badge.svg",
-  title: "My experience",
+  title: "Experiências",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, optio.",
+    "Aqui você encontrará um resumo das minhas experiências profissionais na área.",
   items: [
     {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
-    },
-    {
-      company: "Tech Solutions",
-      position: "Full Stack Developer",
-      duration: "2024 - Present",
+      company: "Freelancer",
+      position: "Desenvolvedor Full Stack",
+      duration: "2024 - Atualmente",
     },
   ],
 };
@@ -142,9 +91,9 @@ const experience = {
 // Education
 const education = {
   icon: "/assets/resume/cap.svg",
-  title: "My education",
+  title: "Educação",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, optio.",
+    "Aqui você encontrará um resumo da minha formação acadêmica e as principais áreas de estudo que me prepararam para minha carreira.",
   items: [
     {
       institution: "EBAC - Escola Britanica de Artes Criativas e Tecnologia.",
@@ -155,16 +104,16 @@ const education = {
       institution:
         "UNIME - União Metropolitana de Educação e Cultura da Bahia.",
       degree: "ADS",
-      duration: "2024 - studying",
+      duration: "2024 - Cursando",
     },
   ],
 };
 
 // Skills data
 const skills = {
-  title: "My Skills",
+  title: "Habilidades",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, optio.",
+    "Aqui você encontrará um resumo das tecnologias que domino e utilizo no meu dia a dia, essenciais para o meu trabalho como desenvolvedor.",
   skillList: [
     {
       icon: <FaHtml5 />,
@@ -281,10 +230,10 @@ export default function Resume() {
           className="flex flex-col xl:flex-row gap-[60px] "
         >
           <TabsList className="flex flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6 ">
-            <TabsTrigger value="experience">Experience</TabsTrigger>
-            <TabsTrigger value="education">Education</TabsTrigger>
-            <TabsTrigger value="skills">Skills</TabsTrigger>
-            <TabsTrigger value="about">About me</TabsTrigger>
+            <TabsTrigger value="experience">Experiência</TabsTrigger>
+            <TabsTrigger value="education">Educação</TabsTrigger>
+            <TabsTrigger value="skills">Habilidades</TabsTrigger>
+            <TabsTrigger value="about">Sobre mim</TabsTrigger>
           </TabsList>
 
           {/* content */}
@@ -354,7 +303,7 @@ export default function Resume() {
             </TabsContent>
 
             {/* skills */}
-            <TabsContent value="skills" className="w-full">
+            <TabsContent value="skills" className="w-full mb-5">
               <div className="flex flex-col gap-[30px]">
                 <div className="flex flex-col gap-[30px] text-center xl:text-left">
                   <h3 className="text-4xl font-bold">{skills.title}</h3>

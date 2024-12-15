@@ -9,11 +9,11 @@ interface SocialProps {
 const socials = [
   {
     icon: <FaGithub />,
-    path: "",
+    path: "https://github.com/ecblandy",
   },
   {
     icon: <FaLinkedinIn />,
-    path: "",
+    path: "https://linkedin.com/in/viniciusblandy/",
   },
   {
     icon: <FaTwitter />,
@@ -26,7 +26,12 @@ export default function Social({ containerStyles, iconStyles }: SocialProps) {
     <div className={containerStyles}>
       {socials.map((item, index) => {
         return (
-          <Link key={index} href={item.path} className={iconStyles}>
+          <Link
+            key={index}
+            href={item.path}
+            className={iconStyles}
+            target="_blank"
+          >
             {item.icon}
           </Link>
         );

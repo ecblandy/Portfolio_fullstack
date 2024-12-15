@@ -19,8 +19,9 @@ export default function Home() {
               <span className="text-accent">Vinícius Blandy</span>{" "}
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80 ">
-              I excel at crafting elegant digital experiences and I am
-              proficiente in various programing language and tech
+              Desenvolvedor frontend em constante evolução, com conhecimento em
+              diversas tecnologias. Atualmente, mergulhando no universo do
+              backend.
             </p>
 
             {/* btn and socials */}

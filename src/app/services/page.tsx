@@ -6,28 +6,7 @@ import { motion } from "framer-motion";
 const services = [
   {
     num: "01",
-    title: "Web development",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, quidem!",
-    href: "",
-  },
-  {
-    num: "02",
-    title: "UI/UX Design",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, quidem!",
-    href: "",
-  },
-  {
-    num: "03",
-    title: "Logo Design",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, quidem!",
-    href: "",
-  },
-  {
-    num: "04",
-    title: "SEO",
+    title: "Desenvolvimento Web",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, quidem!",
     href: "",

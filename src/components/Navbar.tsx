@@ -10,23 +10,23 @@ interface LinksProps {
 
 export const links: LinksProps[] = [
   {
-    name: "home",
+    name: "início",
     path: "/",
   },
   {
-    name: "services",
+    name: "serviços",
     path: "/services",
   },
   {
-    name: "resume",
+    name: "resumo",
     path: "/resume",
   },
   {
-    name: "work",
+    name: "projetos",
     path: "/work",
   },
   {
-    name: "contact",
+    name: "contato",
     path: "/contact",
   },
 ];
