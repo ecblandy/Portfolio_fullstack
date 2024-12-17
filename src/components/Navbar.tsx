@@ -34,7 +34,6 @@ export const links: LinksProps[] = [
 export default function Navbar() {
   // exibe a rota, exemplo do home /
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <nav className="flex gap-8">
       {links.map((link, index) => {

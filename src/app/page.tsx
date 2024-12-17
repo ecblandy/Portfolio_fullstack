@@ -5,8 +5,13 @@ import { FiDownload } from "react-icons/fi";
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
 import Stats from "@/components/Stats";
+import { getCommit, yearsOfJob, repos } from "@/lib/githubServices";
 
-export default function Home() {
+export default async function Home() {
+  const commit = await getCommit();
+  const experienceYears = yearsOfJob();
+  const repositories = await repos();
+
   return (
     <section className="h-full">
       <div className="container mx-auto h-full">
@@ -50,7 +55,11 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Stats />
+      <Stats
+        commit={commit}
+        experience={experienceYears}
+        repositories={repositories}
+      />
     </section>
   );
 }

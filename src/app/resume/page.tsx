@@ -37,7 +37,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { yearsOfJob } from "@/lib/githubServices";
 
+const experienceYears = yearsOfJob();
 // About data
 const about = {
   title: "Sobre mim",
@@ -53,7 +55,10 @@ const about = {
     },
     {
       fieldName: "Experiência",
-      fieldValue: "2 anos",
+      fieldValue:
+        experienceYears > 1
+          ? `${experienceYears} anos`
+          : `${experienceYears} ano`,
     },
     {
       fieldName: "Nacionalidade",
@@ -110,7 +115,7 @@ const education = {
 };
 
 // Skills data
-const skills = {
+export const skills = {
   title: "Habilidades",
   description:
     "Aqui você encontrará um resumo das tecnologias que domino e utilizo no meu dia a dia, essenciais para o meu trabalho como desenvolvedor.",
