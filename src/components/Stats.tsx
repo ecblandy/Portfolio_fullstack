@@ -1,6 +1,7 @@
 "use client";
+import { skills } from "@/lib/resume";
 import CountUp from "react-countup";
-import { skills } from "@/app/resume/page";
+
 interface StatsProps {
   commit: number;
   experience: number;
