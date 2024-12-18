@@ -28,8 +28,6 @@ export const emailFromUser = (props: FormField) => {
     service: props.service,
   };
 
-  if (!process.env.SERVICE_ID) return;
-  console.log("sou service id", process.env.SERVICE_ID);
   emailjs
     .send(serviceId, userTemplate, emailInfo, publicKey)
     .then((response) => {

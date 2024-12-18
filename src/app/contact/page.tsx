@@ -76,7 +76,6 @@ export default function Contact() {
     event.preventDefault();
     emailFromMe(values);
     emailFromUser(values);
-    console.log(process.env);
   };
 
   const handleSelectChange = (value: string) => {
