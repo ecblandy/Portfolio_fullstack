@@ -1,4 +1,7 @@
 "use client";
+
+import dotenv from "dotenv";
+dotenv.config();
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,6 +16,16 @@ import {
 } from "@/components/ui/select";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { emailFromMe, emailFromUser } from "../../lib/emailSend";
+export interface FormField {
+  name: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+}
 
 const info = [
   {
@@ -33,6 +46,47 @@ const info = [
 ];
 
 export default function Contact() {
+  const formValues = {
+    name: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+    service: "",
+  };
+  const [values, setValues] = useState<FormField>(formValues);
+
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    // Extrai o "name" (nome do campo) e o "value" (valor digitado) do campo atual.
+    const { name, value } = event.target;
+
+    // -> "prevState" é o estado anterior do formulário.
+    // Usa o operador de espalhamento ("...prevState") para preservar os campos já existentes no estado.
+    // Atualiza apenas o campo correspondente ao "name" com o valor atual digitado ("value"). EX: email: asuhashuahs@mail.com
+
+    setValues((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    emailFromMe(values);
+    emailFromUser(values);
+    console.log(process.env);
+  };
+
+  const handleSelectChange = (value: string) => {
+    // Atualiza o estado 'service' com o valor selecionado
+    setValues((prevState) => ({
+      ...prevState,
+      service: value,
+    }));
+  };
+
   return (
     <motion.section
       initial={{ opacity: 1 }}
@@ -46,7 +100,10 @@ export default function Contact() {
         <div className="flex flex-col xl:flex-row gap-[30px]">
           {/* form */}
           <div className="xl:w-[54%] order-2 xl:order-none">
-            <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
+            <form
+              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
+              onSubmit={handleSubmit}
+            >
               <h3 className="text-4xl text-accent">Vamos trabalhar juntos!</h3>
               <p className="text-white/60 ">
                 Se você está interessado(a) em fazer uma parceria, me contratar
@@ -56,13 +113,41 @@ export default function Contact() {
               </p>
               {/* input */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input type="firstname" placeholder="Nome" />
-                <Input type="lastname" placeholder="Sobrenome" />
-                <Input type="email" placeholder="Email" />
-                <Input type="phone" placeholder="Telefone" />
+                <Input
+                  type="text"
+                  placeholder="Nome"
+                  name="name"
+                  value={values.name}
+                  onChange={handleChange}
+                />
+                <Input
+                  type="text"
+                  placeholder="Sobrenome"
+                  name="lastName"
+                  value={values.lastName}
+                  onChange={handleChange}
+                />
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                />
+                <Input
+                  type="tel"
+                  placeholder="Telefone"
+                  name="phone"
+                  onChange={handleChange}
+                  value={values.phone}
+                />
               </div>
               {/* select */}
-              <Select>
+              <Select
+                name="service"
+                value={values.service}
+                onValueChange={handleSelectChange}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="selecione o serviço" />
                 </SelectTrigger>
@@ -70,17 +155,22 @@ export default function Contact() {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Selecione o serviço</SelectLabel>
-                    <SelectItem value="est">Desenvolvedor Web</SelectItem>
+                    <SelectItem value="Desenvolvedor Web">
+                      Desenvolvedor Web
+                    </SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
               {/* textarea */}
               <Textarea
+                name="message"
                 className="h-[200px]"
                 placeholder="Escreva sua mensagem aqui."
+                value={values.message}
+                onChange={handleChange}
               />
               {/* btn */}
-              <Button size="md" className="max-w-40 rounded">
+              <Button type="submit" size="md" className="max-w-40 rounded">
                 Enviar mensagem
               </Button>
             </form>

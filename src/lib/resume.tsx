@@ -29,7 +29,7 @@ import { TbApi } from "react-icons/tb";
 import { yearsOfJob } from "./githubServices";
 
 const experienceYears = yearsOfJob();
-
+console.log(experienceYears);
 // About data
 export const about = {
   title: "Sobre mim",
