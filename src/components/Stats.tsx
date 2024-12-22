@@ -1,5 +1,5 @@
 "use client";
-import { skills } from "@/lib/resume";
+import { skills } from "./resume";
 import CountUp from "react-countup";
 
 interface StatsProps {
@@ -17,7 +17,7 @@ export default function Stats({
 }: StatsProps) {
   const stats = [
     {
-      num: experience, //parseFloat(`${experience.years}.${experience.months})`
+      num: experience,
       text: experience > 1 ? "Anos de experiência" : "Ano de experiência",
     },
     {

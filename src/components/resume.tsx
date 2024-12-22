@@ -26,7 +26,7 @@ import {
   SiJquery,
 } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
-import { yearsOfJob } from "./githubServices";
+import { yearsOfJob } from "@/lib/githubServices";
 
 const experienceYears = yearsOfJob();
 // About data
