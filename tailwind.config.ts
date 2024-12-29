@@ -23,10 +23,15 @@ export default {
     },
     extend: {
       colors: {
-        primary: "#1c1c22",
         accent: {
-          DEFAULT: "#00ff99",
-          hover: "#00e187",
+          DEFAULT: "#00ff99", // Mantemos o mesmo tom vibrante de verde para o modo claro
+          hover: "#00e187", // Mantemos o tom de hover igual ao do modo escuro
+        },
+        light: {
+          primary: "#ffffff",
+        },
+        dark: {
+          primary: "#1c1c22",
         },
       },
       borderRadius: {

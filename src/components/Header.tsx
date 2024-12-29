@@ -1,8 +1,10 @@
+"use client";
 import Link from "next/link";
-import { Button } from "./ui/button";
 // Components
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
+import { ThemeSwitcher } from "./theme-switcher";
+
 export default function Header() {
   return (
     <>
@@ -10,17 +12,16 @@ export default function Header() {
         <div className="container mx-auto flex justify-between items-center">
           {/* logo */}
           <Link href="/">
-            <h1 className="text-4xl font-semibold">
-              Vinícius<span className="text-accent">.</span>
+            <h1 className="text-4xl font-semibold text-dark-primary dark:text-light-primary">
+              Vinícius
+              <span className="text-accent">.</span>
             </h1>
           </Link>
 
           {/* desktop nav & botõo de contato */}
           <div className="hidden xl:flex items-center gap-8">
             <Navbar />
-            <Link href="/contact">
-              <Button>Login</Button>
-            </Link>
+            <ThemeSwitcher />
           </div>
           {/* mobile nav */}
           <div className="xl:hidden">

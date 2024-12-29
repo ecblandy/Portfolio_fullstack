@@ -4,7 +4,12 @@
 
 @layer base {
   body {
-    @apply font-primary bg-primary text-white leading-loose;
+    @apply font-primary text-white leading-loose;
+    background-color: #8f8c8c;
+  }
+
+  .dark body {
+    background-color: theme("colors.dark.primary");
   }
 
   .h1 {
@@ -17,7 +22,11 @@
     @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold;
   }
   .text-outline {
-    -webkit-text-stroke: 1px #ffffff;
+    -webkit-text-stroke: 1px black;
+  }
+
+  .dark .text-outline {
+    -webkit-text-stroke: 1px white;
   }
 
   .text-outline-hover {

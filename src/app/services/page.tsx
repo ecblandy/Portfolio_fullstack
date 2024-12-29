@@ -37,24 +37,26 @@ export default function Services() {
               >
                 {/* top */}
                 <div className="w-full flex justify-between items-center">
-                  <div className="text-5xl font-extrabold text-outline text-transparent group-hover:text-outline-hover transition-all duration-500">
+                  <div className="text-5xl font-extrabold text-outline  text-transparent group-hover:text-outline-hover transition-all duration-500">
                     {service.num}
                   </div>
                   <Link
                     href={service.href}
-                    className="w-[70px] h-[70px] rounded-full bg-white group-hover:bg-accent transition-all duration-500 flex justify-center items-center hover:-rotate-45"
+                    className="w-[70px] h-[70px] rounded-full bg-dark-primary group-hover:text-dark-primary dark:bg-light-primary dark:text-dark-primary group-hover:bg-accent transition-all duration-500 flex justify-center items-center hover:-rotate-45"
                   >
                     <BsArrowDownRight className="text-primary text-3xl" />
                   </Link>
                 </div>
                 {/* heading */}
-                <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500">
+                <h2 className="text-[42px] font-bold leading-none text-dark-primary dark:text-light-primary group-hover:text-accent transition-all duration-500">
                   {service.title}
                 </h2>
                 {/* description */}
-                <p className="text-white/60 ">{service.description}</p>
+                <p className="text-dark-primary/80 dark:text-white/60 ">
+                  {service.description}
+                </p>
                 {/* border */}
-                <div className="border-b border-white/20 w-full"></div>
+                <div className="border-b border-dark-primary/20 dark:border-light-primary/20 w-full"></div>
               </div>
             );
           })}

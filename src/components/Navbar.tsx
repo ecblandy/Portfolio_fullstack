@@ -37,13 +37,16 @@ export default function Navbar() {
   return (
     <nav className="flex gap-8">
       {links.map((link, index) => {
+        const isActive = link.path === pathname;
         return (
           <Link
             href={link.path}
             key={index}
             className={`${
-              link.path === pathname && "text-accent border-b-2 border-accent"
-            } capitalize font-medium hover:text-accent transition-all`}
+              isActive
+                ? "text-accent border-b-2 border-accent"
+                : "text-dark-primary dark:text-light-primary"
+            } capitalize font-medium  hover:text-accent transition-all`}
           >
             {link.name}
           </Link>

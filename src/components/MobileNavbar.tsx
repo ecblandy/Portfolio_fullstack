@@ -11,6 +11,7 @@ import Link from "next/link";
 import { CiMenuFries } from "react-icons/ci";
 import { links } from "./Navbar";
 import { usePathname } from "next/navigation";
+import { ThemeSwitcher } from "./theme-switcher";
 
 export default function MobileNavbar() {
   const pathname = usePathname();
@@ -55,6 +56,7 @@ export default function MobileNavbar() {
                 </Link>
               );
             })}
+            <ThemeSwitcher />
           </nav>
         </SheetContent>
       </Sheet>

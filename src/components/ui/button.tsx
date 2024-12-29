@@ -10,15 +10,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        // Variantes do botão
         default: "bg-accent text-primary hover:bg-accent-hover",
         primary: "bg-primary text-white",
         outline:
-          "border border-accent bg-transparent text-accent hover:bg-accent hover:text-primary",
+          "border border-accent rounded-full bg-transparent text-accent hover:bg-dark-primary dark:hover:bg-light-primary hover:text-light-primary dark:hover:text-dark-primary", // Altere a borda para verde e o hover para fundo preto e texto branco
       },
       size: {
         default: "h-[44px] px-6",
         md: "h-[48px] px-6",
         lg: "h-[56px] px-8 text-sm uppercase tracking-[2px]",
+        menu: "w-9 h-9",
       },
     },
     defaultVariants: {

@@ -27,7 +27,7 @@ export default function Photo() {
               ease: "easeInOut",
             },
           }}
-          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-lighten absolute"
+          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-overlay  dark:mix-blend-lighten absolute"
         >
           <Image
             src="/assets/portfolio-img.png"
@@ -35,7 +35,7 @@ export default function Photo() {
             priority
             quality={100}
             fill
-            className="object-contain"
+            className="object-contain rounded-full"
           />
         </motion.div>
 

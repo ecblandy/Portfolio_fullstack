@@ -100,7 +100,7 @@ export default function Contact() {
           {/* form */}
           <div className="xl:w-[54%] order-2 xl:order-none">
             <form
-              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
+              className="flex flex-col gap-6 p-10 bg-[#3f3e3e] dark:bg-[#232329] rounded-xl"
               onSubmit={handleSubmit}
             >
               <h3 className="text-4xl text-accent">Vamos trabalhar juntos!</h3>
@@ -118,6 +118,7 @@ export default function Contact() {
                   name="name"
                   value={values.name}
                   onChange={handleChange}
+                  className="bg-[#000]/60"
                 />
                 <Input
                   type="text"
@@ -125,6 +126,7 @@ export default function Contact() {
                   name="lastName"
                   value={values.lastName}
                   onChange={handleChange}
+                  className="bg-[#000]/60"
                 />
                 <Input
                   type="email"
@@ -132,6 +134,7 @@ export default function Contact() {
                   name="email"
                   value={values.email}
                   onChange={handleChange}
+                  className="bg-[#000]/60"
                 />
                 <Input
                   type="tel"
@@ -139,6 +142,7 @@ export default function Contact() {
                   name="phone"
                   onChange={handleChange}
                   value={values.phone}
+                  className="bg-[#000]/60"
                 />
               </div>
               {/* select */}
@@ -163,13 +167,17 @@ export default function Contact() {
               {/* textarea */}
               <Textarea
                 name="message"
-                className="h-[200px]"
+                className="h-[200px] resize-none bg-[#000]/60"
                 placeholder="Escreva sua mensagem aqui."
                 value={values.message}
                 onChange={handleChange}
               />
               {/* btn */}
-              <Button type="submit" size="md" className="max-w-40 rounded">
+              <Button
+                type="submit"
+                size="md"
+                className="max-w-40 rounded text-dark-primary"
+              >
                 Enviar mensagem
               </Button>
             </form>
@@ -180,12 +188,16 @@ export default function Contact() {
               {info.map((item, index) => {
                 return (
                   <li key={index} className="flex items-center gap-6 ">
-                    <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
+                    <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#3f3e3e] dark:bg-[#232329] text-accent rounded-md flex items-center justify-center">
                       <div className="text-[28px]">{item.icon}</div>
                     </div>
                     <div className="flex-1">
-                      <p className="text-white/60">{item.title}</p>
-                      <h3 className="text-xl">{item.description}</h3>
+                      <p className="text-dark-primary/60 dark:text-light-primary/60">
+                        {item.title}
+                      </p>
+                      <h3 className="text-xl text-dark-primary dark:text-light-primary">
+                        {item.description}
+                      </h3>
                     </div>
                   </li>
                 );
