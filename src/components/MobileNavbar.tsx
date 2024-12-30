@@ -12,19 +12,29 @@ import { CiMenuFries } from "react-icons/ci";
 import { links } from "./Navbar";
 import { usePathname } from "next/navigation";
 import { ThemeSwitcher } from "./theme-switcher";
+import { useEffect, useState } from "react";
 
 export default function MobileNavbar() {
   const pathname = usePathname();
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  useEffect(() => {
+    setIsSheetOpen(false);
+  }, [pathname]);
+
   return (
     <nav>
-      <Sheet>
+      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
         {/* Botão para abrir o Sheet */}
         <SheetTrigger className="flex items-center justify-center">
           <CiMenuFries className="text-[32px] text-accent" />
         </SheetTrigger>
 
         {/* Conteúdo do Sheet */}
-        <SheetContent side="right" className="flex flex-col p-4 space-y-6">
+        <SheetContent
+          side="right"
+          className="flex flex-col p-4 space-y-6 bg-[#3f3e3e] dark:bg-[#232329]"
+        >
           {/* Acessibilidade */}
           <div className="sr-only">
             <SheetTitle>Menu de Navegação</SheetTitle>
