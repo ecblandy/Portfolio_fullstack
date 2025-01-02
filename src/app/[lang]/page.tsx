@@ -7,7 +7,11 @@ import { getDictionaryServerOnly } from "@/dictionaries/default-dictionary-serve
 import { Locale } from "@/config/i18n";
 import RenderStats from "@/components/seila";
 
-export default async function Home({ params }: { params: { lang: Locale } }) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
   const { lang } = await params;
 
   const dict = await getDictionaryServerOnly(lang);
