@@ -1,5 +1,5 @@
 import emailjs from "emailjs-com";
-import { FormField } from "@/app/contact/page";
+import { FormField } from "@/app/[lang]/contact/page";
 const serviceId: string = process.env.NEXT_PUBLIC_SERVICE_ID || "";
 const myTemplate: string = process.env.NEXT_PUBLIC_MY_TEMPLATE || "";
 const userTemplate: string = process.env.NEXT_PUBLIC_USER_TEMPLATE || "";

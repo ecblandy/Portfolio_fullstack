@@ -1,42 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-interface LinksProps {
-  name: string;
-  path: string;
-}
-
-export const links: LinksProps[] = [
-  {
-    name: "início",
-    path: "/",
-  },
-  {
-    name: "serviços",
-    path: "/services",
-  },
-  {
-    name: "resumo",
-    path: "/resume",
-  },
-  {
-    name: "projetos",
-    path: "/work",
-  },
-  {
-    name: "contato",
-    path: "/contact",
-  },
-];
+import { useParams, usePathname } from "next/navigation";
+import { selectLink } from "@/lib/links";
 
 export default function Navbar() {
   // exibe a rota, exemplo do home /
   const pathname = usePathname();
+  const { lang } = useParams();
+
   return (
     <nav className="flex gap-8">
-      {links.map((link, index) => {
+      {selectLink(pathname, lang).map((link, index) => {
         const isActive = link.path === pathname;
         return (
           <Link

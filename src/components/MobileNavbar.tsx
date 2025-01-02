@@ -9,13 +9,15 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { CiMenuFries } from "react-icons/ci";
-import { links } from "./Navbar";
-import { usePathname } from "next/navigation";
+import { selectLink } from "@/lib/links";
+import { useParams, usePathname } from "next/navigation";
 import { ThemeSwitcher } from "./theme-switcher";
 import { useEffect, useState } from "react";
+import LanguageSwitcher from "./language-switcher";
 
 export default function MobileNavbar() {
   const pathname = usePathname();
+  const { lang } = useParams();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   useEffect(() => {
@@ -52,7 +54,7 @@ export default function MobileNavbar() {
 
           {/* Nav */}
           <nav className="flex flex-col justify-center items-center gap-4">
-            {links.map((link, index) => {
+            {selectLink(pathname, lang).map((link, index) => {
               return (
                 <Link
                   href={link.path}
@@ -66,6 +68,7 @@ export default function MobileNavbar() {
                 </Link>
               );
             })}
+            <LanguageSwitcher />
             <ThemeSwitcher />
           </nav>
         </SheetContent>

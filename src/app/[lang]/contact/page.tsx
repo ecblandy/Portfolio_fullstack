@@ -17,7 +17,8 @@ import {
 import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { emailFromMe, emailFromUser } from "../../components/emailSend";
+import { emailFromMe, emailFromUser } from "../../../components/emailSend";
+
 export interface FormField {
   name: string;
   lastName: string;

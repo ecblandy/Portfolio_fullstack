@@ -1,16 +1,16 @@
-"use";
 import { Button } from "@/components/ui/button";
 import { FiDownload } from "react-icons/fi";
 // Components
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
-import Stats from "@/components/Stats";
-import { getCommit, yearsOfJob, repos } from "@/lib/githubServices";
+import { getDictionaryServerOnly } from "@/dictionaries/default-dictionary-server-only";
+import { Locale } from "@/config/i18n";
+import RenderStats from "@/components/seila";
 
-export default async function Home() {
-  const commit = await getCommit();
-  const experienceYears = yearsOfJob();
-  const repositories = await repos();
+export default async function Home({ params }: { params: { lang: Locale } }) {
+  const { lang } = await params;
+
+  const dict = await getDictionaryServerOnly(lang);
 
   return (
     <section className="h-full">
@@ -19,7 +19,7 @@ export default async function Home() {
           {/* text */}
           <div className="text-center xl:text-left order-2 xl:order-none">
             <span className="text-xl text-dark-primary dark:text-light-primary">
-              Desenvolvedor de Software
+              {dict.site.stack}
             </span>
             <h1 className="h1 mb-6 text-dark-primary dark:text-light-primary">
               Olá eu sou <br />
@@ -61,11 +61,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <Stats
-        commit={commit}
-        experience={experienceYears}
-        repositories={repositories}
-      />
+      <RenderStats />
     </section>
   );
 }
