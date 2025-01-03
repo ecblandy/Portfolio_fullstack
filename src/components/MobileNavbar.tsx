@@ -14,11 +14,25 @@ import { useParams, usePathname } from "next/navigation";
 import { ThemeSwitcher } from "./theme-switcher";
 import { useEffect, useState } from "react";
 import LanguageSwitcher from "./language-switcher";
+import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
+import { Locale } from "@/config/i18n";
 
 export default function MobileNavbar() {
   const pathname = usePathname();
-  const { lang } = useParams();
+  const { lang }: { lang: Locale } = useParams();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const dict = getDictionaryUseClient(lang);
+
+  const selectLinkValues = {
+    pathname,
+    lng: lang,
+    home: dict.navbar.home,
+    services: dict.navbar.services,
+    resume: dict.navbar.resume,
+    projects: dict.navbar.projects,
+    contact: dict.navbar.contact,
+  };
 
   useEffect(() => {
     setIsSheetOpen(false);
@@ -54,7 +68,7 @@ export default function MobileNavbar() {
 
           {/* Nav */}
           <nav className="flex flex-col justify-center items-center gap-4">
-            {selectLink(pathname, lang).map((link, index) => {
+            {selectLink(selectLinkValues).map((link, index) => {
               return (
                 <Link
                   href={link.path}
