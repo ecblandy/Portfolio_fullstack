@@ -1,36 +1,164 @@
 "use client";
-import { skills } from "./resume";
 import CountUp from "react-countup";
-
+import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
+import { useParams } from "next/navigation";
+import { Locale } from "@/config/i18n";
+import {
+  FaCss3,
+  FaFigma,
+  FaGulp,
+  FaHtml5,
+  FaJs,
+  FaNodeJs,
+  FaReact,
+  FaVuejs,
+} from "react-icons/fa";
+import {
+  SiBootstrap,
+  SiCypress,
+  SiExpress,
+  SiGit,
+  SiGithub,
+  SiGrunt,
+  SiJquery,
+  SiLess,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiSass,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+import { TbApi } from "react-icons/tb";
 interface StatsProps {
   commit: number;
   experience: number;
   repositories: number;
 }
 
-const { skillList } = skills;
-
 export default function Stats({
   commit,
   experience,
   repositories,
 }: StatsProps) {
+  const { lang }: { lang: Locale } = useParams();
+  const dict = getDictionaryUseClient(lang);
+
+  // Skills data
+  const skillList = [
+    {
+      icon: <FaHtml5 />,
+      name: "html 5",
+    },
+    {
+      icon: <FaCss3 />,
+      name: "css 3",
+    },
+    {
+      icon: <FaJs />,
+      name: "javascript",
+    },
+    {
+      icon: <FaReact />,
+      name: "react.js",
+    },
+    {
+      icon: <SiNextdotjs />,
+      name: "next.js",
+    },
+    {
+      icon: <SiTailwindcss />,
+      name: "tailwind.css",
+    },
+    {
+      icon: <SiBootstrap />,
+      name: "bootstrap",
+    },
+    {
+      icon: <FaNodeJs />,
+      name: "node.js",
+    },
+    {
+      icon: <FaFigma />,
+      name: "figma",
+    },
+    {
+      icon: <SiTypescript />,
+      name: "typescript",
+    },
+    {
+      icon: <SiSass />,
+      name: "sass",
+    },
+    {
+      icon: <SiLess />,
+      name: "less",
+    },
+    {
+      icon: <SiGrunt />,
+      name: "grunt",
+    },
+    {
+      icon: <SiExpress />,
+      name: "express",
+    },
+    {
+      icon: <SiGithub />,
+      name: "github",
+    },
+    {
+      icon: <SiGit />,
+      name: "git",
+    },
+    {
+      icon: <FaGulp />,
+      name: "gulp",
+    },
+    {
+      icon: <SiMysql />,
+      name: "mysql",
+    },
+    {
+      icon: <SiMongodb />,
+      name: "mongodb",
+    },
+    {
+      icon: <FaVuejs />,
+      name: "vue.js",
+    },
+    {
+      icon: <SiCypress />,
+      name: "cypress",
+    },
+    {
+      icon: <SiJquery />,
+      name: "jquery",
+    },
+    {
+      icon: <TbApi />,
+      name: "jquery",
+    },
+  ];
+
   const stats = [
     {
       num: experience,
-      text: experience > 1 ? "Anos de experiência" : "Ano de experiência",
+      text:
+        experience > 1
+          ? dict.home.stats.experience.plural
+          : dict.home.stats.experience.singular,
     },
     {
       num: repositories,
-      text: "Projetos completos",
+      text: dict.home.stats.projects,
     },
     {
       num: skillList.length,
-      text: "Tecnologias dominadas",
+      text: dict.home.stats.techs,
     },
     {
       num: commit,
-      text: "Commits de código",
+      text: dict.home.stats.commits,
     },
   ];
 

@@ -3,15 +3,29 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { selectLink } from "@/lib/links";
+import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
+import { Locale } from "@/config/i18n";
 
 export default function Navbar() {
   // exibe a rota, exemplo do home /
   const pathname = usePathname();
-  const { lang } = useParams();
+  const { lang }: { lang: Locale } = useParams();
+
+  const dict = getDictionaryUseClient(lang);
+
+  const selectLinkValues = {
+    pathname,
+    lng: lang,
+    home: dict.navbar.home,
+    services: dict.navbar.services,
+    resume: dict.navbar.resume,
+    projects: dict.navbar.projects,
+    contact: dict.navbar.contact,
+  };
 
   return (
     <nav className="flex gap-8">
-      {selectLink(pathname, lang).map((link, index) => {
+      {selectLink(selectLinkValues).map((link, index) => {
         const isActive = link.path === pathname;
         return (
           <Link

@@ -1,31 +1,46 @@
-interface LinksProps {
+type linkType = {
   name: string;
   path: string;
-}
+};
 
-export const selectLink = (
-  pathname: string,
-  lng: string | string[] | undefined
-) => {
-  const links: LinksProps[] = [
+type selectLinkType = {
+  pathname: string;
+  lng: string;
+  home: string;
+  services: string;
+  resume: string;
+  projects: string;
+  contact: string;
+};
+
+export const selectLink = ({
+  pathname,
+  lng,
+  home,
+  services,
+  resume,
+  projects,
+  contact,
+}: selectLinkType) => {
+  const links: linkType[] = [
     {
-      name: "início",
+      name: home,
       path: `/${lng}`,
     },
     {
-      name: "serviços",
+      name: services,
       path: verifyPath(pathname, lng, "services"),
     },
     {
-      name: "resumo",
+      name: resume,
       path: verifyPath(pathname, lng, "resume"),
     },
     {
-      name: "projetos",
+      name: projects,
       path: verifyPath(pathname, lng, "projects"),
     },
     {
-      name: "contato",
+      name: contact,
       path: verifyPath(pathname, lng, "contact"),
     },
   ];
@@ -33,15 +48,11 @@ export const selectLink = (
   return links;
 };
 
-const verifyPath = (
-  path: string,
-  lng: string | string[] | undefined,
-  changePath?: string
-) => {
+const verifyPath = (pathname: string, lng: string, changePath?: string) => {
   const defaultUrl = `/${lng}`; // /pt-BR ou /en-US
   const regex = `/${lng}\/([a-zA-Z-]+)/`;
 
-  if (path.match(regex)) return defaultUrl;
+  if (pathname && pathname.match(regex)) return defaultUrl;
 
   return defaultUrl.concat(`/${changePath}`);
 };

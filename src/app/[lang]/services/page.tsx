@@ -2,18 +2,21 @@
 import { BsArrowDownRight } from "react-icons/bs";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-const services = [
-  {
-    num: "01",
-    title: "Desenvolvimento Web",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, quidem!",
-    href: "",
-  },
-];
+import { Locale } from "@/config/i18n";
+import { useParams } from "next/navigation";
+import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
 
 export default function Services() {
+  const { lang }: { lang: Locale } = useParams();
+  const dict = getDictionaryUseClient(lang);
+  const services = [
+    {
+      num: "01",
+      title: dict.services.title,
+      description: dict.services.description,
+      href: "",
+    },
+  ];
   return (
     <section className="min-h-[80vh] flex flex-col justify-center py-12 xl:py-6">
       <div className="container mx-auto">

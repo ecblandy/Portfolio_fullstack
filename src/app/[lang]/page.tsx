@@ -23,16 +23,14 @@ export default async function Home({
           {/* text */}
           <div className="text-center xl:text-left order-2 xl:order-none">
             <span className="text-xl text-dark-primary dark:text-light-primary">
-              {dict.site.stack}
+              {dict.home.stack}
             </span>
             <h1 className="h1 mb-6 text-dark-primary dark:text-light-primary">
-              Olá eu sou <br />
+              {dict.home.hello} <br />
               <span className="text-accent">Vinícius Blandy</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-dark-primary/80 dark:text-light-primary/80 ">
-              Desenvolvedor frontend em constante evolução, com conhecimento em
-              diversas tecnologias. Atualmente, mergulhando no universo do
-              backend.
+              {dict.home.description}
             </p>
 
             {/* btn and socials */}

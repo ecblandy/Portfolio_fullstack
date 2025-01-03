@@ -18,6 +18,9 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { emailFromMe, emailFromUser } from "../../../components/emailSend";
+import { useParams } from "next/navigation";
+import { Locale } from "@/config/i18n";
+import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
 
 export interface FormField {
   name: string;
@@ -28,25 +31,28 @@ export interface FormField {
   message: string;
 }
 
-const info = [
-  {
-    icon: <FaPhoneAlt />,
-    title: "Telefone",
-    description: "71 99402-7893",
-  },
-  {
-    icon: <FaEnvelope />,
-    title: "Email",
-    description: "devblandy@hotmail.com",
-  },
-  {
-    icon: <FaMapMarkedAlt />,
-    title: "Endereço",
-    description: "Salvador - BA",
-  },
-];
-
 export default function Contact() {
+  const { lang }: { lang: Locale } = useParams();
+  const dict = getDictionaryUseClient(lang);
+
+  const info = [
+    {
+      icon: <FaPhoneAlt />,
+      title: dict.contact.sidebar.phone,
+      description: "71 99402-7893",
+    },
+    {
+      icon: <FaEnvelope />,
+      title: "Email",
+      description: "devblandy@hotmail.com",
+    },
+    {
+      icon: <FaMapMarkedAlt />,
+      title: dict.contact.sidebar.address,
+      description: "Salvador - BA",
+    },
+  ];
+
   const formValues = {
     name: "",
     lastName: "",
@@ -104,18 +110,13 @@ export default function Contact() {
               className="flex flex-col gap-6 p-10 bg-[#3f3e3e] dark:bg-[#232329] rounded-xl"
               onSubmit={handleSubmit}
             >
-              <h3 className="text-4xl text-accent">Vamos trabalhar juntos!</h3>
-              <p className="text-white/60 ">
-                Se você está interessado(a) em fazer uma parceria, me contratar
-                como freelancer ou me oferecer uma vaga de emprego, ficarei
-                feliz em conversar! Estou sempre aberto a novas oportunidades e
-                desafios.
-              </p>
+              <h3 className="text-4xl text-accent">{dict.contact.title}</h3>
+              <p className="text-white/60 ">{dict.contact.description}</p>
               {/* input */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
                   type="text"
-                  placeholder="Nome"
+                  placeholder={dict.contact.form.name}
                   name="name"
                   value={values.name}
                   onChange={handleChange}
@@ -123,7 +124,7 @@ export default function Contact() {
                 />
                 <Input
                   type="text"
-                  placeholder="Sobrenome"
+                  placeholder={dict.contact.form.lastName}
                   name="lastName"
                   value={values.lastName}
                   onChange={handleChange}
@@ -139,7 +140,7 @@ export default function Contact() {
                 />
                 <Input
                   type="tel"
-                  placeholder="Telefone"
+                  placeholder={dict.contact.form.phone}
                   name="phone"
                   onChange={handleChange}
                   value={values.phone}
@@ -153,14 +154,23 @@ export default function Contact() {
                 onValueChange={handleSelectChange}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="selecione o serviço" />
+                  <SelectValue placeholder={dict.contact.form.service.title} />
                 </SelectTrigger>
 
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>Selecione o serviço</SelectLabel>
-                    <SelectItem value="Desenvolvedor Web">
-                      Desenvolvedor Web
+                    <SelectLabel>{dict.contact.form.service.title}</SelectLabel>
+                    <SelectItem value="web">
+                      {dict.contact.form.service.options.web}
+                    </SelectItem>
+                    <SelectItem value="mobile">
+                      {dict.contact.form.service.options.mobile}
+                    </SelectItem>
+                    <SelectItem value="consulting">
+                      {dict.contact.form.service.options.consulting}
+                    </SelectItem>
+                    <SelectItem value="other">
+                      {dict.contact.form.service.options.other}
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>
@@ -179,7 +189,7 @@ export default function Contact() {
                 size="md"
                 className="max-w-40 rounded text-dark-primary"
               >
-                Enviar mensagem
+                {dict.contact.form.button}
               </Button>
             </form>
           </div>
