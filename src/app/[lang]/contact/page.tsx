@@ -6,6 +6,8 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { useParams } from "next/navigation";
+
+// Utils
 import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
 import { Locale } from "@/config/i18n";
 
@@ -92,6 +94,7 @@ export default function Contact() {
     emailFromUser(fieldValues);
   };
 
+  // Lidando com a mudança do select
   const handleSelectChange = (value: string) => {
     // Atualiza o estado 'service' com o valor selecionado
     setFieldValues((prevState) => ({
