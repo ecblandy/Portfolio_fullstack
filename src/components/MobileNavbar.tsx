@@ -1,5 +1,10 @@
 "use client";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useParams, usePathname } from "next/navigation";
+import { CiMenuFries } from "react-icons/ci";
 
+// Components
 import {
   Sheet,
   SheetContent,
@@ -7,14 +12,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import Link from "next/link";
-import { CiMenuFries } from "react-icons/ci";
-import { selectLink } from "@/lib/links";
-import { useParams, usePathname } from "next/navigation";
 import { ThemeSwitcher } from "./theme-switcher";
-import { useEffect, useState } from "react";
 import LanguageSwitcher from "./language-switcher";
+
+// Utils
 import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
+import { selectLink } from "@/lib/links";
 import { Locale } from "@/config/i18n";
 
 export default function MobileNavbar() {
@@ -24,6 +27,7 @@ export default function MobileNavbar() {
 
   const dict = getDictionaryUseClient(lang);
 
+  // Contém a linguagem atual, caminho da URL e o dicionario dos links de navegação(com a tradução)
   const selectLinkValues = {
     pathname,
     lng: lang,
@@ -34,6 +38,7 @@ export default function MobileNavbar() {
     contact: dict.navbar.contact,
   };
 
+  // Fecha o menu se o usuario for para outra rota
   useEffect(() => {
     setIsSheetOpen(false);
   }, [pathname]);

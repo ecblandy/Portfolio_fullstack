@@ -1,11 +1,12 @@
 "use client"; // Componente do lado do cliente
 
 import Link from "next/link";
+import { useParams } from "next/navigation";
+
 // Components
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 import { ThemeSwitcher } from "./theme-switcher";
-import { useParams } from "next/navigation";
 import LanguageSwitcher from "./language-switcher";
 
 export default function Header() {
