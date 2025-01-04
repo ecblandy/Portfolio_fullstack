@@ -16,7 +16,7 @@ export default function Navbar() {
   const dict = getDictionaryUseClient(lang);
 
   // Contém a linguagem atual, caminho da URL e o dicionario dos links de navegação(com a tradução)
-  const selectLinkValues = {
+  const navigationData = {
     pathname,
     lng: lang,
     home: dict.navbar.home,
@@ -28,7 +28,7 @@ export default function Navbar() {
 
   return (
     <nav className="flex gap-8">
-      {selectLink(selectLinkValues).map((link, index) => {
+      {selectLink(navigationData).map((link, index) => {
         const isActive = link.path === pathname;
         return (
           <Link

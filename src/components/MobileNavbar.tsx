@@ -28,7 +28,7 @@ export default function MobileNavbar() {
   const dict = getDictionaryUseClient(lang);
 
   // Contém a linguagem atual, caminho da URL e o dicionario dos links de navegação(com a tradução)
-  const selectLinkValues = {
+  const navigationDate = {
     pathname,
     lng: lang,
     home: dict.navbar.home,
@@ -73,7 +73,7 @@ export default function MobileNavbar() {
 
           {/* Nav */}
           <nav className="flex flex-col justify-center items-center gap-4">
-            {selectLink(selectLinkValues).map((link, index) => {
+            {selectLink(navigationDate).map((link, index) => {
               return (
                 <Link
                   href={link.path}
