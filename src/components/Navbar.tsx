@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+
+// Utils
 import { selectLink } from "@/lib/links";
 import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
 import { Locale } from "@/config/i18n";
@@ -13,6 +15,7 @@ export default function Navbar() {
 
   const dict = getDictionaryUseClient(lang);
 
+  // Contém a linguagem atual, caminho da URL e o dicionario dos links de navegação(com a tradução)
   const selectLinkValues = {
     pathname,
     lng: lang,
