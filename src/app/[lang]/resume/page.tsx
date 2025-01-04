@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useParams } from "next/navigation";
 import {
   FaCss3,
   FaFigma,
@@ -28,9 +29,12 @@ import {
   SiCypress,
   SiJquery,
 } from "react-icons/si";
-
 import { TbApi } from "react-icons/tb";
+
+// Utils
 import { yearsOfJob } from "@/lib/githubServices";
+import { Locale } from "@/config/i18n";
+import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
 
 // Components
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -41,16 +45,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useParams } from "next/navigation";
-import { Locale } from "@/config/i18n";
-import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
 
 export default function Resume() {
   const { lang }: { lang: Locale } = useParams();
   const dict = getDictionaryUseClient(lang);
 
   const experienceYears = yearsOfJob();
-  // About data
+
+  // Informações da TAB sobre
   const about = {
     title: dict.resume.sidebar.title.about,
     description: dict.resume.sidebar.description.about,
@@ -88,7 +90,8 @@ export default function Resume() {
       },
     ],
   };
-  // Experience data
+
+  // Informações da TAB experiência
   const experience = {
     icon: "/assets/resume/badge.svg",
     title: dict.resume.sidebar.title.experience,
@@ -102,7 +105,7 @@ export default function Resume() {
     ],
   };
 
-  // Education
+  // Informações da TAB educação
   const education = {
     icon: "/assets/resume/cap.svg",
     title: dict.resume.sidebar.title.education,
@@ -129,7 +132,7 @@ export default function Resume() {
     ],
   };
 
-  // Skills data
+  // Informações da TAB habilidades
   const skills = {
     title: dict.resume.sidebar.title.skills,
     description: dict.resume.sidebar.description.skills,
