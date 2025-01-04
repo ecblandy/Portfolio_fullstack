@@ -1,15 +1,19 @@
 "use client";
 import { BsArrowDownRight } from "react-icons/bs";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Locale } from "@/config/i18n";
 import { useParams } from "next/navigation";
+import { motion } from "framer-motion";
+
+// Utils
+import { Locale } from "@/config/i18n";
 import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
 
 export default function Services() {
   const { lang }: { lang: Locale } = useParams();
   const dict = getDictionaryUseClient(lang);
-  const services = [
+
+  // Lista de serviços
+  const listServices = [
     {
       num: "01",
       title: dict.services.title,
@@ -32,7 +36,7 @@ export default function Services() {
           }}
           className="grid grid-cols-1 md:grid-cols-2 gap-[60px]"
         >
-          {services.map((service, index) => {
+          {listServices.map((service, index) => {
             return (
               <div
                 key={index}
