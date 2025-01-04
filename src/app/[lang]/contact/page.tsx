@@ -1,7 +1,15 @@
 "use client";
-
 import dotenv from "dotenv";
 dotenv.config();
+
+import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { motion } from "framer-motion";
+import { useParams } from "next/navigation";
+import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
+import { Locale } from "@/config/i18n";
+
+// Components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,14 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
-import { motion } from "framer-motion";
-import { ChangeEvent, FormEvent, useState } from "react";
 import { emailFromMe, emailFromUser } from "../../../components/emailSend";
-import { useParams } from "next/navigation";
-import { Locale } from "@/config/i18n";
-import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
 
+// Tipagem dos campoos do formulario
 export interface FormField {
   name: string;
   lastName: string;
@@ -31,11 +34,16 @@ export interface FormField {
   message: string;
 }
 
+export interface ChangeEventType {
+  (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void;
+}
+
 export default function Contact() {
   const { lang }: { lang: Locale } = useParams();
   const dict = getDictionaryUseClient(lang);
 
-  const info = [
+  // Informações de contato da SIDEBAR
+  const contactInfo = [
     {
       icon: <FaPhoneAlt />,
       title: dict.contact.sidebar.phone,
@@ -53,6 +61,7 @@ export default function Contact() {
     },
   ];
 
+  // Objeto com os valores iniciais do formulário
   const formValues = {
     name: "",
     lastName: "",
@@ -61,33 +70,31 @@ export default function Contact() {
     message: "",
     service: "",
   };
-  const [values, setValues] = useState<FormField>(formValues);
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    // Extrai o "name" (nome do campo) e o "value" (valor digitado) do campo atual.
-    const { name, value } = event.target;
+  // Iniciando o estado com os valores iniciais do formulário
+  const [fieldValues, setFieldValues] = useState<FormField>(formValues);
 
-    // -> "prevState" é o estado anterior do formulário.
-    // Usa o operador de espalhamento ("...prevState") para preservar os campos já existentes no estado.
-    // Atualiza apenas o campo correspondente ao "name" com o valor atual digitado ("value"). EX: email: asuhashuahs@mail.com
+  // Capturando mudanças no formulário
+  const handleChange: ChangeEventType = (event) => {
+    const { name, value } = event.target; // Extrai o "name" (nome do campo) e o "value" (valor digitado) do campo atual.
 
-    setValues((prevState) => ({
-      ...prevState,
-      [name]: value,
+    setFieldValues((prevState) => ({
+      //  "prevState" é o estado anterior do formulário.
+      ...prevState, // Usa o operador de espalhamento ("...prevState") para preservar os campos já existentes no estado.
+      [name]: value, // Atualiza apenas o campo correspondente ao "name" com o valor atual digitado ("value"). EX: email: asuhashuahs@mail.com
     }));
   };
 
+  // Envio do formulário
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    emailFromMe(values);
-    emailFromUser(values);
+    emailFromMe(fieldValues);
+    emailFromUser(fieldValues);
   };
 
   const handleSelectChange = (value: string) => {
     // Atualiza o estado 'service' com o valor selecionado
-    setValues((prevState) => ({
+    setFieldValues((prevState) => ({
       ...prevState,
       service: value,
     }));
@@ -118,7 +125,7 @@ export default function Contact() {
                   type="text"
                   placeholder={dict.contact.form.name}
                   name="name"
-                  value={values.name}
+                  value={fieldValues.name}
                   onChange={handleChange}
                   className="bg-[#000]/60"
                 />
@@ -126,7 +133,7 @@ export default function Contact() {
                   type="text"
                   placeholder={dict.contact.form.lastName}
                   name="lastName"
-                  value={values.lastName}
+                  value={fieldValues.lastName}
                   onChange={handleChange}
                   className="bg-[#000]/60"
                 />
@@ -134,7 +141,7 @@ export default function Contact() {
                   type="email"
                   placeholder="Email"
                   name="email"
-                  value={values.email}
+                  value={fieldValues.email}
                   onChange={handleChange}
                   className="bg-[#000]/60"
                 />
@@ -143,14 +150,14 @@ export default function Contact() {
                   placeholder={dict.contact.form.phone}
                   name="phone"
                   onChange={handleChange}
-                  value={values.phone}
+                  value={fieldValues.phone}
                   className="bg-[#000]/60"
                 />
               </div>
               {/* select */}
               <Select
                 name="service"
-                value={values.service}
+                value={fieldValues.service}
                 onValueChange={handleSelectChange}
               >
                 <SelectTrigger className="w-full">
@@ -180,7 +187,7 @@ export default function Contact() {
                 name="message"
                 className="h-[200px] resize-none bg-[#000]/60"
                 placeholder="Escreva sua mensagem aqui."
-                value={values.message}
+                value={fieldValues.message}
                 onChange={handleChange}
               />
               {/* btn */}
@@ -196,7 +203,7 @@ export default function Contact() {
           {/* info */}
           <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
             <ul className="flex flex-col gap-10">
-              {info.map((item, index) => {
+              {contactInfo.map((item, index) => {
                 return (
                   <li key={index} className="flex items-center gap-6 ">
                     <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#3f3e3e] dark:bg-[#232329] text-accent rounded-md flex items-center justify-center">

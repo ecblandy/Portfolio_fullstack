@@ -7,6 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+
 export const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
   const currentTheme = theme === "light" ? "dark" : "light";
