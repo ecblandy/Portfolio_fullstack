@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { FiDownload } from "react-icons/fi";
+
 // Components
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
@@ -7,11 +8,11 @@ import { getDictionaryServerOnly } from "@/dictionaries/default-dictionary-serve
 import { Locale } from "@/config/i18n";
 import RenderStats from "@/components/seila";
 
-export default async function Home({
-  params,
-}: {
+interface PropsType {
   params: Promise<{ lang: Locale }>;
-}) {
+}
+
+export default async function Home({ params }: PropsType) {
   const { lang } = await params;
 
   const dict = await getDictionaryServerOnly(lang);
