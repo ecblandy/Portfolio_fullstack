@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/select";
 import { emailFromMe, emailFromUser } from "../../../components/emailSend";
 
-// Tipagem dos campoos do formulario
+// Tipagem dos campos do formulario
 export interface FormField {
   name: string;
   lastName: string;
