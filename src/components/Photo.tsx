@@ -32,10 +32,11 @@ export default function Photo() {
           <Image
             src="/assets/portfolio-img.png"
             alt="Vinícius Blandy - Foto"
-            priority
             quality={100}
+            priority
             fill
             className="object-contain rounded-full"
+            sizes="(max-width: 768px) 298px, 498px"
           />
         </motion.div>
 

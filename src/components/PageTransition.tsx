@@ -2,6 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
+
 interface MyComponentProps {
   children: ReactNode;
 }

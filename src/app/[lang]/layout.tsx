@@ -1,5 +1,5 @@
-import { JetBrains_Mono } from "next/font/google";
 import "../styles/globals.css";
+import { jetBrains } from "@/app/fonts/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
 
 // Components
@@ -7,12 +7,6 @@ import Header from "@/components/Header";
 import PageTransition from "@/components/PageTransition";
 import StairTransition from "@/components/StairTransition";
 import { i18n } from "@/config/i18n";
-
-const jetBrains = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
-  variable: "--font-jetbrainsMono",
-});
 
 export async function generateStaticParams() {
   const languages = i18n.locales.map((lang) => ({ lang }));
