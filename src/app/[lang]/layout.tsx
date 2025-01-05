@@ -3,7 +3,7 @@ import { jetBrains } from "@/app/fonts/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
 
 // Components
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import PageTransition from "@/components/PageTransition";
 import StairTransition from "@/components/StairTransition";
 import { i18n } from "@/config/i18n";
