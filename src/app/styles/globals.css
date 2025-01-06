@@ -8,6 +8,15 @@
     background-color: #8f8c8c;
   }
 
+  .no-spinner {
+    -moz-appearance: textfield; /* Firefox */
+  }
+  .no-spinner::-webkit-inner-spin-button,
+  .no-spinner::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Chrome, Safari */
+  }
+
   .dark body {
     background-color: theme("colors.dark.primary");
   }

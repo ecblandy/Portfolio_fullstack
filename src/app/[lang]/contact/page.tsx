@@ -3,9 +3,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { motion } from "framer-motion";
 import { useParams } from "next/navigation";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 // Utils
 import { getDictionaryUseClient } from "@/dictionaries/default-dictionary-use-client";
@@ -24,7 +27,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { emailFromMe, emailFromUser } from "../../../components/emailSend";
+import ErrorDisplay from "@/components/error-display";
+// import { emailFromMe, emailFromUser } from "../../../components/emailSend";
 
 // Tipagem dos campos do formulario
 export interface FormField {
@@ -40,9 +44,38 @@ export interface ChangeEventType {
   (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void;
 }
 
+// Cria uma validação com zod
+const createEmailSchema = z.object({
+  name: z.string().nonempty("O campo não pode ser vazio."),
+  lastName: z.string().nonempty("O campo não pode ser vazio."),
+  email: z
+    .string()
+    .nonempty("O campo não pode ser vazio.")
+    .email("Formato de email invalido")
+    .toLowerCase()
+    .regex(
+      /@(gmail\.com|hotmail\.com|outlook\.com)$/,
+      "Deve terminar com gmail ou hotmail"
+    ),
+  phone: z.string().nonempty("O campo number não pode ser vazio").min(10),
+  service: z.string().nonempty(),
+  message: z.string().min(1, "Não pode ser vazio"),
+});
+
+type CreateEmailFormData = z.infer<typeof createEmailSchema>;
+
 export default function Contact() {
   const { lang }: { lang: Locale } = useParams();
   const dict = getDictionaryUseClient(lang);
+
+  // Hook para interação com formulario
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateEmailFormData>({
+    resolver: zodResolver(createEmailSchema),
+  });
 
   // Informações de contato da SIDEBAR
   const contactInfo = [
@@ -63,45 +96,16 @@ export default function Contact() {
     },
   ];
 
-  // Objeto com os valores iniciais do formulário
-  const formValues = {
-    name: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    message: "",
-    service: "",
-  };
-
-  // Iniciando o estado com os valores iniciais do formulário
-  const [fieldValues, setFieldValues] = useState<FormField>(formValues);
-
-  // Capturando mudanças no formulário
-  const handleChange: ChangeEventType = (event) => {
-    const { name, value } = event.target; // Extrai o "name" (nome do campo) e o "value" (valor digitado) do campo atual.
-
-    setFieldValues((prevState) => ({
-      //  "prevState" é o estado anterior do formulário.
-      ...prevState, // Usa o operador de espalhamento ("...prevState") para preservar os campos já existentes no estado.
-      [name]: value, // Atualiza apenas o campo correspondente ao "name" com o valor atual digitado ("value"). EX: email: asuhashuahs@mail.com
-    }));
-  };
-
-  // Envio do formulário
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    emailFromMe(fieldValues);
-    emailFromUser(fieldValues);
-  };
-
-  // Lidando com a mudança do select
-  const handleSelectChange = (value: string) => {
-    // Atualiza o estado 'service' com o valor selecionado
-    setFieldValues((prevState) => ({
-      ...prevState,
-      service: value,
-    }));
-  };
+  // const validateForm = () => {
+  //   // const data = {
+  //   //   name: formValues.name,
+  //   //   lastName: formValues.lastName,
+  //   //   email: formValues.email,
+  //   //   phone: formValues.phone,
+  //   //   service: formValues.service,
+  //   //   message: formValues.message,
+  //   // };
+  // };
 
   return (
     <motion.section
@@ -118,7 +122,7 @@ export default function Contact() {
           <div className="xl:w-[54%] order-2 xl:order-none">
             <form
               className="flex flex-col gap-6 p-10 bg-[#3f3e3e] dark:bg-[#232329] rounded-xl"
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit((d) => console.log(d))}
             >
               <h3 className="text-4xl text-accent">{dict.contact.title}</h3>
               <p className="text-white/60 ">{dict.contact.description}</p>
@@ -127,42 +131,34 @@ export default function Contact() {
                 <Input
                   type="text"
                   placeholder={dict.contact.form.name}
-                  name="name"
-                  value={fieldValues.name}
-                  onChange={handleChange}
                   className="bg-[#000]/60"
+                  {...register("name")}
                 />
+
                 <Input
                   type="text"
                   placeholder={dict.contact.form.lastName}
-                  name="lastName"
-                  value={fieldValues.lastName}
-                  onChange={handleChange}
                   className="bg-[#000]/60"
+                  {...register("lastName")}
                 />
+
                 <Input
                   type="email"
                   placeholder="Email"
-                  name="email"
-                  value={fieldValues.email}
-                  onChange={handleChange}
                   className="bg-[#000]/60"
+                  {...register("email")}
                 />
+
                 <Input
-                  type="tel"
+                  type="number"
                   placeholder={dict.contact.form.phone}
-                  name="phone"
-                  onChange={handleChange}
-                  value={fieldValues.phone}
-                  className="bg-[#000]/60"
+                  className="bg-[#000]/60 no-spinner"
+                  maxLength={11}
+                  {...register("phone")}
                 />
               </div>
               {/* select */}
-              <Select
-                name="service"
-                value={fieldValues.service}
-                onValueChange={handleSelectChange}
-              >
+              <Select {...register("service")}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={dict.contact.form.service.title} />
                 </SelectTrigger>
@@ -185,15 +181,13 @@ export default function Contact() {
                   </SelectGroup>
                 </SelectContent>
               </Select>
+
               {/* textarea */}
               <Textarea
-                name="message"
                 className="h-[200px] resize-none bg-[#000]/60"
                 placeholder="Escreva sua mensagem aqui."
-                value={fieldValues.message}
-                onChange={handleChange}
+                {...register("message")}
               />
-              {/* btn */}
               <Button
                 type="submit"
                 size="md"
@@ -202,6 +196,8 @@ export default function Contact() {
                 {dict.contact.form.button}
               </Button>
             </form>
+            {/* error div */}
+            <ErrorDisplay errors={errors} />
           </div>
           {/* info */}
           <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">

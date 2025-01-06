@@ -121,4 +121,13 @@ export const enUS = {
     projects: "Projects",
     contact: "Contact",
   },
+  formValidate: {
+    name: "The name field cannot be empty.",
+    lastName: "The name field cannot be empty.",
+    email: {
+      empty: "The email field cannot be empty.",
+      emailFormat: "The email format is invalid",
+      regex: "The email must be gmail, hotmail or outlook.",
+    },
+  },
 };
