@@ -4,9 +4,10 @@ import { ThemeProvider } from "@/providers/theme-provider";
 
 // Components
 import Header from "@/components/header";
-import PageTransition from "@/components/PageTransition";
-import StairTransition from "@/components/StairTransition";
+import PageTransition from "@/components/page-transition";
+import StairTransition from "@/components/stair-transition";
 import { i18n } from "@/config/i18n";
+import ToastProvider from "@/providers/toast-provider";
 
 export async function generateStaticParams() {
   const languages = i18n.locales.map((lang) => ({ lang }));
@@ -32,6 +33,7 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <StairTransition />
+          <ToastProvider />
           <PageTransition>{children}</PageTransition>
         </ThemeProvider>
       </body>

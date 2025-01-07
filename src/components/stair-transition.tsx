@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 // Components
-import Stairs from "./Stairs";
+import Stairs from "@/components/stairs";
 
 export default function StairTransition() {
   const pathname = usePathname();

@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 // Components
-import Navbar from "./Navbar";
-import MobileNavbar from "./MobileNavbar";
+import Navbar from "@/components/navbar";
+import MobileNavbar from "@/components/mobile-navbar";
 import { ThemeSwitcher } from "./theme-switcher";
 import LanguageSwitcher from "./language-switcher";
 

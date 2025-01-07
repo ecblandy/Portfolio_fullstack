@@ -3,7 +3,7 @@ export const enUS = {
     stack: "Software Developer",
     hello: "Hello, I am",
     description:
-      "Frontend developer in constant evolution, with knowledge in various technologies. Currently diving into the backend universe.",
+      "Frontend developer in constant evolution, with knowledge in various technologies. Currentlerro={!!errors.service}y diving into the backend universe.",
     stats: {
       experience: {
         singular: "Year of experience",
@@ -123,11 +123,17 @@ export const enUS = {
   },
   formValidate: {
     name: "The name field cannot be empty.",
-    lastName: "The name field cannot be empty.",
+    lastName: "The last name field cannot be empty.",
     email: {
       empty: "The email field cannot be empty.",
       emailFormat: "The email format is invalid",
       regex: "The email must be gmail, hotmail or outlook.",
     },
+    phone: {
+      empty: "The phone field cannot be empty",
+      format: "The number format is wrong.",
+    },
+    service: "Select a service",
+    message: "The message field cannot be empty",
   },
 };

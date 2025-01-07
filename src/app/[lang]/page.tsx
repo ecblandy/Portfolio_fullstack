@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/button";
 import { FiDownload } from "react-icons/fi";
 
 // Components
-import Social from "@/components/Social";
-import Photo from "@/components/Photo";
+import Social from "@/components/social";
+import Photo from "@/components/photo";
 import { getDictionaryServerOnly } from "@/dictionaries/default-dictionary-server-only";
 import { Locale } from "@/config/i18n";
-import RenderStats from "@/components/seila";
+import StatsRender from "@/components/status-rendering";
 
 interface PropsType {
   params: Promise<{ lang: Locale }>;
@@ -64,7 +64,7 @@ export default async function Home({ params }: PropsType) {
           </div>
         </div>
       </div>
-      <RenderStats />
+      <StatsRender />
     </section>
   );
 }

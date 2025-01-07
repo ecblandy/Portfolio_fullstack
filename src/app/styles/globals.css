@@ -41,4 +41,36 @@
   .text-outline-hover {
     -webkit-text-stroke: 1px #00ff99;
   }
+
+  .erro-form {
+    border: 1px solid red; /* Adiciona uma borda vermelha */
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate {
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-down {
+    animation: slideUp 0.5s ease-in-out forwards;
+  }
 }

@@ -121,4 +121,19 @@ export const ptBR = {
     projects: "Projetos",
     contact: "Contato",
   },
+  formValidate: {
+    name: "O campo nome não pode estar vazio.",
+    lastName: "O campo sobrenome não pode estar vazio.",
+    email: {
+      empty: "O campo e-mail não pode estar vazio.",
+      emailFormat: "O formato do e-mail é inválido.",
+      regex: "O e-mail deve ser do Gmail, Hotmail ou Outlook.",
+    },
+    phone: {
+      empty: "O campo telefone não pode estar vazio.",
+      format: "O formato do número está errado.",
+    },
+    service: "Selecione um serviço.",
+    message: "O campo mensagem não pode estar vazio.",
+  },
 };

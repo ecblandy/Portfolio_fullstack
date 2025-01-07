@@ -1,7 +1,8 @@
+"use client";
 import emailjs from "emailjs-com";
 
 // Utils
-import { FormField } from "@/app/[lang]/contact/page";
+import { FormField } from "./contact-form";
 
 const serviceId: string = process.env.NEXT_PUBLIC_SERVICE_ID || "";
 const myTemplate: string = process.env.NEXT_PUBLIC_MY_TEMPLATE || "";
@@ -11,6 +12,11 @@ const publicKey: string = process.env.NEXT_PUBLIC_KEY || "";
 // Função que usa o emailjs para enviar o email para meu email
 export const emailFromMe = (props: FormField) => {
   // Informações do email com os campos do formulário
+
+  console.log("Service ID:", serviceId);
+  console.log("My Template ID:", myTemplate);
+  console.log("User Template ID:", userTemplate);
+  console.log("Public Key (User ID):", publicKey);
   const emailInfo = {
     fullName: `${props.name} ${props.lastName}`,
     email: props.email,
@@ -25,7 +31,9 @@ export const emailFromMe = (props: FormField) => {
 };
 
 // Função que usa o emailjs para enviar o email para cliente/parceiro
-export const emailFromUser = (props: FormField) => {
+export const emailFromUser = async (
+  props: FormField
+): Promise<{ response: string; status: number } | undefined> => {
   // Informações do email com os campos do formulário
   const emailInfo = {
     fullName: `${props.name} ${props.lastName}`,
@@ -35,9 +43,19 @@ export const emailFromUser = (props: FormField) => {
     service: props.service,
   };
 
-  emailjs
-    .send(serviceId, userTemplate, emailInfo, publicKey)
-    .then((response) => {
-      console.log(response.text, response.status);
-    });
+  try {
+    const response = await emailjs.send(
+      serviceId,
+      userTemplate,
+      emailInfo,
+      publicKey
+    );
+    return {
+      response: response.text,
+      status: response.status,
+    };
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
 };

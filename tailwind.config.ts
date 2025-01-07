@@ -26,6 +26,7 @@ export default {
         accent: {
           DEFAULT: "#00ff99", // Mantemos o mesmo tom vibrante de verde para o modo claro
           hover: "#00e187", // Mantemos o tom de hover igual ao do modo escuro
+          error: "#e10000",
         },
         light: {
           primary: "#ffffff",
