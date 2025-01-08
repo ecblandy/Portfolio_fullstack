@@ -4,7 +4,6 @@ dotenv.config();
 
 import { motion } from "framer-motion";
 import { useParams } from "next/navigation";
-
 // Utils
 import { Locale } from "@/config/i18n";
 
@@ -14,8 +13,6 @@ import ContactInfo from "@/components/contact-info";
 
 export default function Contact() {
   const { lang }: { lang: Locale } = useParams();
-
-  // Informações de contato da SIDEBAR
 
   return (
     <motion.section
@@ -30,6 +27,7 @@ export default function Contact() {
         <div className="flex flex-col xl:flex-row gap-[30px]">
           {/* form */}
           <ContactForm lang={lang} />
+
           {/* info */}
           <ContactInfo lang={lang} />
         </div>

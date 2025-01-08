@@ -25,6 +25,7 @@ import ErrorDisplay from "./error-display";
 import { Locale } from "@/config/i18n";
 import SpinnerLoading from "./spinner-loading";
 import { useState } from "react";
+import { playNotificationSound } from "@/lib/sound-notification";
 
 // Tipagem dos campos do formulario
 export interface FormField {
@@ -43,6 +44,7 @@ export type LanguageType = {
 export default function ContactForm({ lang }: LanguageType) {
   const dict = getDictionaryUseClient(lang);
   const [sendLoading, setSendLoading] = useState(false);
+  // const [notification, setNotification] = useState<boolean>(false);
 
   /// Tipando o dado do email
   type CreateEmailFormData = z.infer<typeof createEmailSchema>;
@@ -99,6 +101,7 @@ export default function ContactForm({ lang }: LanguageType) {
 
   // Envio do email
   const sendEmail = async () => {
+    playNotificationSound();
     setSendLoading(true);
     console.log(sendLoading);
     const formValues = getValues();
@@ -127,11 +130,20 @@ export default function ContactForm({ lang }: LanguageType) {
         }
       });
 
+      // Exibe o toast e toca o som dependendo do estado
       toast.promise(emailPromise, {
-        pending: "Enviando e-mail...",
-        success:
-          "E-mail enviado com sucesso! Por favor, cheque sua caixa de spam.",
-        error: "Falha ao enviar o e-mail. Tente novamente mais tarde.",
+        pending: (() => {
+          playNotificationSound("/assets/sound/pending.wav"); // Som para envio pendente
+          return "Enviando e-mail...";
+        })(),
+        success: (() => {
+          playNotificationSound("/assets/sound/success.wav"); // Som para sucesso
+          return "E-mail enviado com sucesso! Por favor, cheque sua caixa de spam.";
+        })(),
+        error: (() => {
+          playNotificationSound("/assets/sound/error.wav"); // Som para erro
+          return "Falha ao enviar o e-mail. Tente novamente mais tarde.";
+        })(),
       });
 
       emailPromise.finally(() => {

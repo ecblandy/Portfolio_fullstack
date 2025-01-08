@@ -12,11 +12,6 @@ const publicKey: string = process.env.NEXT_PUBLIC_KEY || "";
 // Função que usa o emailjs para enviar o email para meu email
 export const emailFromMe = (props: FormField) => {
   // Informações do email com os campos do formulário
-
-  console.log("Service ID:", serviceId);
-  console.log("My Template ID:", myTemplate);
-  console.log("User Template ID:", userTemplate);
-  console.log("Public Key (User ID):", publicKey);
   const emailInfo = {
     fullName: `${props.name} ${props.lastName}`,
     email: props.email,
